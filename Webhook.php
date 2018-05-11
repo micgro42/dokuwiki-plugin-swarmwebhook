@@ -52,25 +52,11 @@ class Webhook
         /** @var \helper_plugin_swarmzapierstructwebhook $helper */
         $helper = plugin_load('helper', 'swarmzapierstructwebhook');
 
-        $data = json_decode($json, true);
-        $timestamp = $data['createdAt'];
-        $checkinID = $data['id'];
-        $date = date('Y-m-d', $timestamp); // FIXME: use timezone offset?
-        $locationName = $data['venue']['name'];
-
-        $lookupData = [
-            'date' => $date,
-            'time' => date_iso8601($timestamp),
-            'checkinid' => $checkinID,
-            'locname' => $locationName,
-            'json' => $json,
-        ];
-        if (!empty($data['shout'])) {
-            $lookupData['shout'] = $data['shout'];
-        }
+        $lookupData = $helper->extractDataFromPayload(json_decode($json, true));
+        $lookupData['json'] = $json;
 
         try {
-            $helper->deleteCheckinFromLookup($checkinID);
+            $helper->deleteCheckinFromLookup($lookupData['checkinid']);
             $helper->saveDataToLookup($lookupData);
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();

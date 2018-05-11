@@ -11,6 +11,33 @@ use dokuwiki\plugin\struct\meta\StructException;
 
 class helper_plugin_swarmzapierstructwebhook extends DokuWiki_Plugin
 {
+
+    /**
+     * Extract the data to be saved from the payload
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function extractDataFromPayload(array $data)
+    {
+        $timestamp = $data['createdAt'];
+        $checkinID = $data['id'];
+        $date = date('Y-m-d', $timestamp); // FIXME: use timezone offset?
+        $locationName = $data['venue']['name'];
+
+        $lookupData = [
+            'date' => $date,
+            'time' => date_iso8601($timestamp),
+            'checkinid' => $checkinID,
+            'locname' => $locationName,
+        ];
+        if (!empty($data['shout'])) {
+            $lookupData['shout'] = $data['shout'];
+        }
+        return $lookupData;
+    }
+
     /**
      * @param array $data associative array in the form of [columnname => columnvalue]
      */
