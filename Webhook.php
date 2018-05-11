@@ -6,13 +6,6 @@ class Webhook
 {
     public function run()
     {
-        /** @var \helper_plugin_struct $struct */
-        $struct = plugin_load('helper', 'struct');
-        if (!$struct) {
-            http_status(422, 'struct plugin not active at server');
-            return;
-        }
-
         global $conf, $INPUT;
 
         if ($conf['debug']) {
@@ -36,8 +29,30 @@ class Webhook
         }
 
         $body = file_get_contents('php://input');
-        $data = json_decode($body, true);
 
+        $this->handleWebhookPayload($body);
+
+        http_status(202);
+    }
+
+    /**
+     * Stores the webhook's payload to the struct table
+     *
+     * @param string $json the original webhooks payload as json
+     */
+    protected function handleWebhookPayload($json)
+    {
+        /** @var \helper_plugin_struct $struct */
+        $struct = plugin_load('helper', 'struct');
+        if (!$struct) {
+            http_status(422, 'struct plugin not active at this server');
+            exit();
+        }
+
+        /** @var \helper_plugin_swarmzapierstructwebhook $helper */
+        $helper = plugin_load('helper', 'swarmzapierstructwebhook');
+
+        $data = json_decode($json, true);
         $timestamp = $data['createdAt'];
         $checkinID = $data['id'];
         $date = date('Y-m-d', $timestamp); // FIXME: use timezone offset?
@@ -48,7 +63,7 @@ class Webhook
             'time' => date_iso8601($timestamp),
             'checkinid' => $checkinID,
             'locname' => $locationName,
-            'json' => $body,
+            'json' => $json,
         ];
         if (!empty($data['shout'])) {
             $lookupData['shout'] = $data['shout'];
@@ -58,9 +73,10 @@ class Webhook
             $helper->deleteCheckinFromLookup($checkinID);
             $helper->saveDataToLookup($lookupData);
         } catch (\Exception $e) {
-            dbglog($e->getMessage());
+            $errorMessage = $e->getMessage();
+            dbglog($errorMessage);
+            http_status(500, $errorMessage);
+            exit();
         }
-
-        http_status(202);
     }
 }
