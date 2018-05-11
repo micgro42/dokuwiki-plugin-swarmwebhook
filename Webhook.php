@@ -14,8 +14,12 @@ class Webhook
             dbglog($_SERVER);
         }
 
-        /** @var \helper_plugin_swarmzapierstructwebhook $helper */
+        /** @var null|\helper_plugin_swarmzapierstructwebhook $helper */
         $helper = plugin_load('helper', 'swarmzapierstructwebhook');
+        if (!$helper) {
+            http_status(422, 'swarmzapierstructwebhook plugin not active at this server');
+            return;
+        }
         $storedSecret = $helper->getConf('hook secret');
         if (!empty($storedSecret)) {
             $requestSecret = $INPUT->server->str('X_HOOK_SECRET');
@@ -50,7 +54,7 @@ class Webhook
      */
     protected function handleWebhookPayload($json)
     {
-        /** @var \helper_plugin_struct $struct */
+        /** @var null|\helper_plugin_struct $struct */
         $struct = plugin_load('helper', 'struct');
         if (!$struct) {
             http_status(422, 'struct plugin not active at this server');
