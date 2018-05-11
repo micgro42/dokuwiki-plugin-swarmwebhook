@@ -5,5 +5,4 @@
  * @author Michael Große <mic.grosse@googlemail.com>
  */
 
-//$conf['fixme']    = 'FIXME';
-
+$conf['hook_secret']    = '';

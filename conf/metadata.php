@@ -6,5 +6,4 @@
  */
 
 
-//$meta['fixme'] = array('string');
-
+$meta['hook_secret'] = array('password');

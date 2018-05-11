@@ -1,4 +1,7 @@
 <?php
+use dokuwiki\plugin\struct\meta\AccessTable;
+use dokuwiki\plugin\struct\meta\StructException;
+
 /**
  * DokuWiki Plugin swarmzapierstructwebhook (Helper Component)
  *
@@ -6,13 +9,54 @@
  * @author  Michael Große <mic.grosse@googlemail.com>
  */
 
-// must be run within Dokuwiki
-if (!defined('DOKU_INC')) {
-    die();
-}
-
 class helper_plugin_swarmzapierstructwebhook extends DokuWiki_Plugin
 {
+    /**
+     * @param array $data associative array in the form of [columnname => columnvalue]
+     */
+    public function saveDataToLookup(array $data)
+    {
+        $access = AccessTable::byTableName('swarm', 0, 0);
+        if (!$access->getSchema()->isEditable()) {
+            throw new StructException('lookup save error: no permission for schema');
+        }
+        $validator = $access->getValidator($data);
+        if (!$validator->validate()) {
+            throw new StructException("Validation failed:\n%s", implode("\n", $validator->getErrors()));
+        }
+        if (!$validator->saveData()) {
+            throw new StructException('No data saved');
+        }
+    }
 
+    /**
+     * Deletes a checkin from the lookup
+     *
+     * @param string $checkinid
+     */
+    public function deleteCheckinFromLookup($checkinid)
+    {
+        $tablename = 'swarm';
+
+        /** @var remote_plugin_struct $remote */
+        $remote = plugin_load('remote', 'struct');
+        $rows = $remote->getAggregationData(
+            [$tablename],
+            ['%rowid%'],
+            [['logic'=> 'and', 'condition' => "checkinid = $checkinid"]]
+        );
+
+        $pids = array_column($rows, '%rowid%');
+
+        if (empty($pids)) {
+            return;
+        }
+        foreach ($pids as $pid) { // should only be a single entry
+            $schemadata = AccessTable::byTableName($tablename, $pid);
+            if (!$schemadata->getSchema()->isEditable()) {
+                throw new StructException('lookup delete error: no permission for schema');
+            }
+            $schemadata->clearData();
+        }
+    }
 }
-
