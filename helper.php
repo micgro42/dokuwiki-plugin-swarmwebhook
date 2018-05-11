@@ -23,12 +23,19 @@ class helper_plugin_swarmzapierstructwebhook extends DokuWiki_Plugin
     {
         $timestamp = $data['createdAt'];
         $checkinID = $data['id'];
-        $date = date('Y-m-d', $timestamp); // FIXME: use timezone offset?
         $locationName = $data['venue']['name'];
+
+        $tzSign = $data['timeZoneOffset'] >= 0 ? '+' : '-';
+        $offsetInHours = $data['timeZoneOffset'] / 60;
+        $tz = $tzSign . str_pad($offsetInHours * 100, 4, '0', STR_PAD_LEFT);
+        $dateTime = new DateTime('now', new DateTimeZone($tz));
+        $dateTime->setTimestamp($timestamp);
+        $date = $dateTime->format('Y-m-d');
+        $time = $dateTime->format(DateTime::ATOM);
 
         $lookupData = [
             'date' => $date,
-            'time' => date_iso8601($timestamp),
+            'time' => $time,
             'checkinid' => $checkinID,
             'locname' => $locationName,
         ];
