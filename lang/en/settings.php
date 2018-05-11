@@ -6,5 +6,5 @@
  */
 
 // keys need to match the config setting name
-// $lang['fixme'] = 'FIXME';
+ $lang['hook_secret'] = 'Secret expected in X_HOOK_SECRET header. Empty to disable check';
 
