@@ -30,15 +30,21 @@ class Webhook
 
         $body = file_get_contents('php://input');
 
-        $this->handleWebhookPayload($body);
+        $ok = $this->handleWebhookPayload($body);
 
-        http_status(202);
+        if ($ok) {
+            http_status(202);
+        }
     }
 
     /**
      * Stores the webhook's payload to the struct table
      *
+     * FIXME: don't set http status here
+     *
      * @param string $json the original webhooks payload as json
+     *
+     * @return bool false if there was an error, http status has already been set, true if everything was ok
      */
     protected function handleWebhookPayload($json)
     {
@@ -46,7 +52,7 @@ class Webhook
         $struct = plugin_load('helper', 'struct');
         if (!$struct) {
             http_status(422, 'struct plugin not active at this server');
-            exit();
+            return false;
         }
 
         /** @var \helper_plugin_swarmzapierstructwebhook $helper */
@@ -58,11 +64,13 @@ class Webhook
         try {
             $helper->deleteCheckinFromLookup($lookupData['checkinid']);
             $helper->saveDataToLookup($lookupData);
-        } catch (\Exception $e) {
+        } catch (\Exception $e) { // FIXME: catch more specific exceptions!
             $errorMessage = $e->getMessage();
             dbglog($errorMessage);
             http_status(500, $errorMessage);
-            exit();
+            return false;
         }
+
+        return true;
     }
 }
