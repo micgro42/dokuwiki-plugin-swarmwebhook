@@ -21,21 +21,14 @@ class helper_plugin_swarmzapierstructwebhook extends DokuWiki_Plugin
      */
     public function extractDataFromPayload(array $data)
     {
-        $timestamp = $data['createdAt'];
         $checkinID = $data['id'];
         $locationName = $data['venue']['name'];
 
-        $tzSign = $data['timeZoneOffset'] >= 0 ? '+' : '-';
-        $offsetInHours = $data['timeZoneOffset'] / 60;
-        $tz = $tzSign . str_pad($offsetInHours * 100, 4, '0', STR_PAD_LEFT);
-        $dateTime = new DateTime('now', new DateTimeZone($tz));
-        $dateTime->setTimestamp($timestamp);
-        $date = $dateTime->format('Y-m-d');
-        $time = $dateTime->format(DateTime::ATOM);
+        $dateTime = $this->getDateTimeInstance($data['createdAt'], $data['timeZoneOffset']);
 
         $lookupData = [
-            'date' => $date,
-            'time' => $time,
+            'date' => $dateTime->format('Y-m-d'),
+            'time' => $dateTime->format(DateTime::ATOM),
             'checkinid' => $checkinID,
             'locname' => $locationName,
         ];
@@ -43,6 +36,24 @@ class helper_plugin_swarmzapierstructwebhook extends DokuWiki_Plugin
             $lookupData['shout'] = $data['shout'];
         }
         return $lookupData;
+    }
+
+    /**
+     * Transforms a timestamp and the timezone offset as provided in the payload into an DateTimeInterface instance
+     *
+     * @param int $timestamp
+     * @param int $payloadTimezoneOffset offset to UTC in minutes
+     *
+     * @return DateTimeInterface
+     */
+    protected function getDateTimeInstance($timestamp, $payloadTimezoneOffset)
+    {
+        $tzSign = $payloadTimezoneOffset >= 0 ? '+' : '-';
+        $offsetInHours = $payloadTimezoneOffset / 60;
+        $tz = $tzSign . str_pad($offsetInHours * 100, 4, '0', STR_PAD_LEFT);
+        $dateTime = new DateTime('now', new DateTimeZone($tz));
+        $dateTime->setTimestamp($timestamp);
+        return $dateTime;
     }
 
     /**
