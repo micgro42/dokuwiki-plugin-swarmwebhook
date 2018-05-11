@@ -1,5 +1,6 @@
 <?php
 use dokuwiki\plugin\struct\meta\AccessTable;
+use dokuwiki\plugin\struct\meta\SchemaImporter;
 use dokuwiki\plugin\struct\meta\StructException;
 
 /**
@@ -103,5 +104,18 @@ class helper_plugin_swarmzapierstructwebhook extends DokuWiki_Plugin
             }
             $schemadata->clearData();
         }
+    }
+
+    /**
+     * Create a new struct schema from the struct json file in the plugin dir
+     */
+    public function createNewSwarmSchema()
+    {
+        $json = file_get_contents(__DIR__ . '/swarm.struct.json');
+        $builder = new SchemaImporter('swarm', $json, true);
+        if (!$builder->build()) {
+            msg('something went wrong while saving', -1);
+        }
+        touch(action_plugin_struct_cache::getSchemaRefreshFile());
     }
 }

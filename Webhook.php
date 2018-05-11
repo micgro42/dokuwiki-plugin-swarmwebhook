@@ -2,6 +2,8 @@
 
 namespace dokuwiki\plugin\swarmzapierstructwebhook;
 
+use dokuwiki\plugin\struct\meta\Schema;
+
 class Webhook
 {
     public function run()
@@ -62,6 +64,11 @@ class Webhook
         $lookupData['json'] = $json;
 
         try {
+            $schemas = Schema::getAll('lookup');
+            if (!in_array('swarm', $schemas)) {
+                $helper->createNewSwarmSchema();
+            }
+
             $helper->deleteCheckinFromLookup($lookupData['checkinid']);
             $helper->saveDataToLookup($lookupData);
         } catch (\Exception $e) { // FIXME: catch more specific exceptions!
