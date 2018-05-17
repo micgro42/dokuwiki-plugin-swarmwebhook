@@ -14,32 +14,6 @@ class helper_plugin_swarmzapierstructwebhook extends DokuWiki_Plugin
 {
 
     /**
-     * Extract the data to be saved from the payload
-     *
-     * @param array $data
-     *
-     * @return array
-     */
-    public function extractDataFromPayload(array $data)
-    {
-        $checkinID = $data['id'];
-        $locationName = $data['venue']['name'];
-
-        $dateTime = $this->getDateTimeInstance($data['createdAt'], $data['timeZoneOffset']);
-
-        $lookupData = [
-            'date' => $dateTime->format('Y-m-d'),
-            'time' => $dateTime->format(DateTime::ATOM),
-            'checkinid' => $checkinID,
-            'locname' => $locationName,
-        ];
-        if (!empty($data['shout'])) {
-            $lookupData['shout'] = $data['shout'];
-        }
-        return $lookupData;
-    }
-
-    /**
      * Transforms a timestamp and the timezone offset as provided in the payload into an DateTimeInterface instance
      *
      * @param int $timestamp
@@ -47,7 +21,7 @@ class helper_plugin_swarmzapierstructwebhook extends DokuWiki_Plugin
      *
      * @return DateTimeInterface
      */
-    protected function getDateTimeInstance($timestamp, $payloadTimezoneOffset)
+    public function getDateTimeInstance($timestamp, $payloadTimezoneOffset)
     {
         $tzSign = $payloadTimezoneOffset >= 0 ? '+' : '-';
         $offsetInHours = $payloadTimezoneOffset / 60;

@@ -7,6 +7,6 @@ define('NOSESSION', 1);
 require_once(DOKU_INC . 'inc/init.php');
 if (!defined('DOKU_TESTING')) {
     // Main
-    $hook = new \dokuwiki\plugin\swarmzapierstructwebhook\Webhook();
+    $hook = \dokuwiki\plugin\swarmzapierstructwebhook\webhooks\AbstractWebhook::getWebhook();
     $hook->run();
 }

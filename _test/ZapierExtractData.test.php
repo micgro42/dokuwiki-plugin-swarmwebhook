@@ -8,7 +8,7 @@ namespace dokuwiki\plugin\swarmzapierstructwebhook\test;
  * @group plugin_swarmzapierstructwebhook
  * @group plugins
  */
-class extractData_plugin_swarmzapierstructwebhook_test extends \DokuWikiTest
+class ZapierExtractData extends \DokuWikiTest
 {
     /** @var array alway enable the needed plugins */
     protected $pluginsEnabled = ['swarmzapierstructwebhook'];
@@ -49,11 +49,10 @@ class extractData_plugin_swarmzapierstructwebhook_test extends \DokuWikiTest
      */
     public function test_extractDataFromPayload($inputJSON, $expectedExtractedData, $msg)
     {
-        /** @var helper_plugin_swarmzapierstructwebhook $helper */
-        $helper = plugin_load('helper', 'swarmzapierstructwebhook');
+        $zapierWebhook = new mock\Zapier();
         $inputArray = json_decode($inputJSON, true);
 
-        $actualExtractedData = $helper->extractDataFromPayload($inputArray);
+        $actualExtractedData = $zapierWebhook->extractDataFromPayload($inputArray);
 
         $this->assertEquals($expectedExtractedData, $actualExtractedData, $msg);
     }

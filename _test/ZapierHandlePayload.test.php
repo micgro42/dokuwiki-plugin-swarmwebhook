@@ -8,7 +8,7 @@ namespace dokuwiki\plugin\swarmzapierstructwebhook\test;
  * @group plugin_swarmzapierstructwebhook
  * @group plugins
  */
-class handlewebhookpayload_plugin_swarmzapierstructwebhook_test extends \DokuWikiTest
+class ZapierHandlePayload extends \DokuWikiTest
 {
     /** @var array alway enable the needed plugins */
     protected $pluginsEnabled = ['swarmzapierstructwebhook', 'struct', 'sqlite'];
@@ -20,7 +20,7 @@ class handlewebhookpayload_plugin_swarmzapierstructwebhook_test extends \DokuWik
     public function test_handleWebhookPayload_initial_single()
     {
         $inputJSON = '{"createdAt": "1525849118", "like": "False", "isMayor": "True", "editableUntil": "1525935518000", "posts": {"count": "0", "textCount": "0"}, "comments": {"count": "0"}, "photos": {"count": "0", "items": ""}, "likes": {"count": "0", "groups": ""}, "venue": {"stats": {"tipCount": "2", "checkinsCount": "1552", "usersCount": "24"}, "name": "CosmoCode", "venueRatingBlacklisted": "True", "url": "http://www.cosmocode.de", "contact": {"twitter": "cosmocode"}, "location": {"city": "Berlin", "labeledLatLngs": "label: display\nlat: 52.5341728565\nlng: 13.4235969339", "cc": "DE", "country": "Germany", "postalCode": "10405", "state": "Berlin", "formattedAddress": "Prenzlauer Allee 36 (Marienburger Strasse),10405 Berlin", "crossStreet": "Marienburger Strasse", "address": "Prenzlauer Allee 36", "lat": "52.5341728565", "lng": "13.4235969339"}, "beenHere": {"lastCheckinExpiredAt": "0"}, "verified": "False", "id": "4b4ca6c8f964a520f8b826e3", "categories": "icon: {u\'prefix\': u\'https://ss3.4sqi.net/img/categories_v2/building/default_\', u\'suffix\': u\'.png\'}\nid: 4bf58dd8d48988d124941735\nname: Office\npluralName: Offices\nprimary: True\nshortName: Office"}, "type": "checkin", "id": "5af29c1e6fd626002c38730b", "timeZoneOffset": "120", "source": {"url": "https://www.swarmapp.com", "name": "Swarm for Android"}}';
-        $webhook = new \dokuwiki\plugin\swarmzapierstructwebhook\test\mock\Webhook();
+        $webhook = new mock\Zapier();
 
         $actualOK = $webhook->handleWebhookPayload($inputJSON);
 
@@ -50,7 +50,7 @@ class handlewebhookpayload_plugin_swarmzapierstructwebhook_test extends \DokuWik
     public function test_handleWebhookPayload_initial_double()
     {
         $inputJSON = '{"createdAt": "1525849118", "like": "False", "isMayor": "True", "editableUntil": "1525935518000", "posts": {"count": "0", "textCount": "0"}, "comments": {"count": "0"}, "photos": {"count": "0", "items": ""}, "likes": {"count": "0", "groups": ""}, "venue": {"stats": {"tipCount": "2", "checkinsCount": "1552", "usersCount": "24"}, "name": "CosmoCode", "venueRatingBlacklisted": "True", "url": "http://www.cosmocode.de", "contact": {"twitter": "cosmocode"}, "location": {"city": "Berlin", "labeledLatLngs": "label: display\nlat: 52.5341728565\nlng: 13.4235969339", "cc": "DE", "country": "Germany", "postalCode": "10405", "state": "Berlin", "formattedAddress": "Prenzlauer Allee 36 (Marienburger Strasse),10405 Berlin", "crossStreet": "Marienburger Strasse", "address": "Prenzlauer Allee 36", "lat": "52.5341728565", "lng": "13.4235969339"}, "beenHere": {"lastCheckinExpiredAt": "0"}, "verified": "False", "id": "4b4ca6c8f964a520f8b826e3", "categories": "icon: {u\'prefix\': u\'https://ss3.4sqi.net/img/categories_v2/building/default_\', u\'suffix\': u\'.png\'}\nid: 4bf58dd8d48988d124941735\nname: Office\npluralName: Offices\nprimary: True\nshortName: Office"}, "type": "checkin", "id": "5af29c1e6fd626002c38730b", "timeZoneOffset": "120", "source": {"url": "https://www.swarmapp.com", "name": "Swarm for Android"}}';
-        $webhook = new \dokuwiki\plugin\swarmzapierstructwebhook\test\mock\Webhook();
+        $webhook = new mock\Zapier();
 
         $actualOK = $webhook->handleWebhookPayload($inputJSON);
         $actualOK = $actualOK && $webhook->handleWebhookPayload($inputJSON);

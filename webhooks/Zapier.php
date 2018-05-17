@@ -1,16 +1,16 @@
 <?php
 
-namespace dokuwiki\plugin\swarmzapierstructwebhook;
+namespace dokuwiki\plugin\swarmzapierstructwebhook\webhooks;
 
 use dokuwiki\plugin\struct\meta\Schema;
 
-class Webhook
+class Zapier extends AbstractWebhook
 {
     public function run()
     {
         global $conf, $INPUT;
 
-        if ($conf['debug']) {
+        if ($conf['allowdebug']) {
             dbglog($_SERVER);
         }
 
@@ -64,7 +64,7 @@ class Webhook
         /** @var \helper_plugin_swarmzapierstructwebhook $helper */
         $helper = plugin_load('helper', 'swarmzapierstructwebhook');
 
-        $lookupData = $helper->extractDataFromPayload(json_decode($json, true));
+        $lookupData = $this->extractDataFromPayload(json_decode($json, true));
         $lookupData['json'] = $json;
 
         try {
@@ -83,5 +83,35 @@ class Webhook
         }
 
         return true;
+    }
+
+
+
+    /**
+     * Extract the data to be saved from the payload
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function extractDataFromPayload(array $data)
+    {
+        $checkinID = $data['id'];
+        $locationName = $data['venue']['name'];
+
+        /** @var \helper_plugin_swarmzapierstructwebhook $helper */
+        $helper = plugin_load('helper', 'swarmzapierstructwebhook');
+        $dateTime = $helper->getDateTimeInstance($data['createdAt'], $data['timeZoneOffset']);
+
+        $lookupData = [
+            'date' => $dateTime->format('Y-m-d'),
+            'time' => $dateTime->format(\DateTime::ATOM),
+            'checkinid' => $checkinID,
+            'locname' => $locationName,
+        ];
+        if (!empty($data['shout'])) {
+            $lookupData['shout'] = $data['shout'];
+        }
+        return $lookupData;
     }
 }
