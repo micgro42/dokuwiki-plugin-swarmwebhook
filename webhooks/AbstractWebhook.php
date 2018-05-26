@@ -17,6 +17,8 @@ abstract class AbstractWebhook
             return new Zapier();
         }
 
-        throw new \RuntimeException('Unknown webhook');
+        // TODO: we currently have no positive key for IFTTT. Find one.
+        // That would be better than just having it as default.
+        return new IFTTT();
     }
 }
