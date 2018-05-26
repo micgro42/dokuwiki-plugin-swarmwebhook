@@ -38,6 +38,7 @@ class ZapierHandlePayload extends \DokuWikiTest
             'swarm.checkinid' => '5af29c1e6fd626002c38730b',
             'swarm.shout' => '',
             'swarm.time' => '2018-05-09 08:58',
+            'swarm.service' => 'Zapier',
         ];
 
         $this->assertTrue($actualOK, 'single event, initially creating the schema');
@@ -69,6 +70,7 @@ class ZapierHandlePayload extends \DokuWikiTest
             'swarm.checkinid' => '5af29c1e6fd626002c38730b',
             'swarm.shout' => '',
             'swarm.time' => '2018-05-09 08:58',
+            'swarm.service' => 'Zapier',
         ];
 
         $this->assertTrue($actualOK, 'single event, initially creating the schema');

@@ -23,6 +23,7 @@ class ZapierExtractData extends \DokuWikiTest
                     'time' => '2018-05-09T08:58:38+02:00',
                     'checkinid' => '5af29c1e6fd626002c38730b',
                     'locname' => 'CosmoCode',
+                    'service' => 'Zapier',
                 ],
                 'normal event without shout',
             ],
@@ -34,6 +35,7 @@ class ZapierExtractData extends \DokuWikiTest
                     'checkinid' => '5af5b26d898bdc002c7a17db',
                     'locname' => 'EDEKA Rhinstraße',
                     'shout' => 'Reiswaffeln 🍚',
+                    'service' => 'Zapier',
                 ],
                 'normal event with shout and sticker',
             ]

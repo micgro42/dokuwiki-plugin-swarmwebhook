@@ -1,7 +1,7 @@
 {
     "structversion": "2018-04-24",
     "schema": "swarm",
-    "id": "23",
+    "id": "24",
     "user": "michael",
     "config": {
         "allowed editors": "",
@@ -134,6 +134,28 @@
                 },
                 "format": "H:i",
                 "prefilltoday": false,
+                "label": {
+                    "en": ""
+                },
+                "hint": {
+                    "en": ""
+                }
+            }
+        },
+        {
+            "colref": 7,
+            "ismulti": false,
+            "isenabled": true,
+            "sort": 70,
+            "label": "service",
+            "class": "Text",
+            "config": {
+                "visibility": {
+                    "inpage": true,
+                    "ineditor": true
+                },
+                "prefix": "",
+                "postfix": "",
                 "label": {
                     "en": ""
                 },

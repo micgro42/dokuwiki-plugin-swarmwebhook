@@ -108,6 +108,7 @@ class Zapier extends AbstractWebhook
             'time' => $dateTime->format(\DateTime::ATOM),
             'checkinid' => $checkinID,
             'locname' => $locationName,
+            'service' => 'Zapier',
         ];
         if (!empty($data['shout'])) {
             $lookupData['shout'] = $data['shout'];
