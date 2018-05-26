@@ -4,7 +4,7 @@ namespace dokuwiki\plugin\swarmzapierstructwebhook\webhooks;
 
 abstract class AbstractWebhook
 {
-    abstract public function run();
+    abstract public function run($json);
 
     /**
      * @return AbstractWebhook

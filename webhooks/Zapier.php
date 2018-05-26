@@ -6,7 +6,7 @@ use dokuwiki\plugin\struct\meta\Schema;
 
 class Zapier extends AbstractWebhook
 {
-    public function run()
+    public function run($json)
     {
         global $conf, $INPUT;
 
@@ -34,9 +34,7 @@ class Zapier extends AbstractWebhook
             }
         }
 
-        $body = file_get_contents('php://input');
-
-        $ok = $this->handleWebhookPayload($body);
+        $ok = $this->handleWebhookPayload($json);
 
         if ($ok) {
             http_status(202);
