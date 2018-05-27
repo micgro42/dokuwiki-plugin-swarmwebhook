@@ -6,8 +6,9 @@
  */
 
 // menu entry for admin plugins
-// $lang['menu'] = 'Your menu entry';
+ $lang['menu'] = 'Swarm Webhook Instructions';
 
 // custom language strings for the plugin
-// $lang['fixme'] = 'FIXME';
+ $lang['secret needed'] = 'Please enter a secret in the %s. For example: %s';
+ $lang['configuration'] = 'configuration';
 
