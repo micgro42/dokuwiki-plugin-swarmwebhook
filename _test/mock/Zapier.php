@@ -1,8 +1,8 @@
 <?php
 
-namespace dokuwiki\plugin\swarmzapierstructwebhook\test\mock;
+namespace dokuwiki\plugin\swarmwebhook\test\mock;
 
-class Zapier extends \dokuwiki\plugin\swarmzapierstructwebhook\webhooks\Zapier
+class Zapier extends \dokuwiki\plugin\swarmwebhook\webhooks\Zapier
 {
     public function handleWebhookPayload($json)
     {

@@ -4,13 +4,13 @@ use dokuwiki\plugin\struct\meta\SchemaImporter;
 use dokuwiki\plugin\struct\meta\StructException;
 
 /**
- * DokuWiki Plugin swarmzapierstructwebhook (Helper Component)
+ * DokuWiki Plugin swarmwebhook (Helper Component)
  *
  * @license GPL 2 http://www.gnu.org/licenses/gpl-2.0.html
  * @author  Michael Große <mic.grosse@googlemail.com>
  */
 
-class helper_plugin_swarmzapierstructwebhook extends DokuWiki_Plugin
+class helper_plugin_swarmwebhook extends DokuWiki_Plugin
 {
 
     /**

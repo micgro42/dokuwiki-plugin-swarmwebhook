@@ -1,9 +1,9 @@
 <?php
 
-namespace dokuwiki\plugin\swarmzapierstructwebhook\test\mock;
+namespace dokuwiki\plugin\swarmwebhook\test\mock;
 
 
-class IFTTT extends \dokuwiki\plugin\swarmzapierstructwebhook\webhooks\IFTTT
+class IFTTT extends \dokuwiki\plugin\swarmwebhook\webhooks\IFTTT
 {
     public function parseTimeIntoTimestamp($timestring, $nowTS)
     {

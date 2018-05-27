@@ -1,17 +1,17 @@
 <?php
 
-namespace dokuwiki\plugin\swarmzapierstructwebhook\test;
+namespace dokuwiki\plugin\swarmwebhook\test;
 
 /**
- * General tests for the swarmzapierstructwebhook plugin
+ * General tests for the swarmwebhook plugin
  *
- * @group plugin_swarmzapierstructwebhook
+ * @group plugin_swarmwebhook
  * @group plugins
  */
 class ZapierExtractData extends \DokuWikiTest
 {
     /** @var array alway enable the needed plugins */
-    protected $pluginsEnabled = ['swarmzapierstructwebhook'];
+    protected $pluginsEnabled = ['swarmwebhook'];
 
     public function dataProvider()
     {

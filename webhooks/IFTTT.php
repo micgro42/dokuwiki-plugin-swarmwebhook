@@ -1,10 +1,10 @@
 <?php
 
-namespace dokuwiki\plugin\swarmzapierstructwebhook\webhooks;
+namespace dokuwiki\plugin\swarmwebhook\webhooks;
 
 use DateTime;
 use dokuwiki\plugin\struct\meta\Schema;
-use dokuwiki\plugin\swarmzapierstructwebhook\meta\Response;
+use dokuwiki\plugin\swarmwebhook\meta\Response;
 
 class IFTTT extends AbstractWebhook
 {
@@ -45,8 +45,8 @@ class IFTTT extends AbstractWebhook
      */
     protected function verifyRequest(array $webhookData)
     {
-        /** @var null|\helper_plugin_swarmzapierstructwebhook $helper */
-        $helper = plugin_load('helper', 'swarmzapierstructwebhook');
+        /** @var null|\helper_plugin_swarmwebhook $helper */
+        $helper = plugin_load('helper', 'swarmwebhook');
         $storedSecret = $helper->getConf('hook secret');
         if (empty($storedSecret)) {
             return true;
@@ -76,8 +76,8 @@ class IFTTT extends AbstractWebhook
         $lookupData['service'] = 'IFTTT';
 
 
-        /** @var \helper_plugin_swarmzapierstructwebhook $helper */
-        $helper = plugin_load('helper', 'swarmzapierstructwebhook');
+        /** @var \helper_plugin_swarmwebhook $helper */
+        $helper = plugin_load('helper', 'swarmwebhook');
         try {
             $schemas = Schema::getAll('lookup');
             if (!in_array('swarm', $schemas)) {

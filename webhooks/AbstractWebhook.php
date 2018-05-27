@@ -1,6 +1,6 @@
 <?php
 
-namespace dokuwiki\plugin\swarmzapierstructwebhook\webhooks;
+namespace dokuwiki\plugin\swarmwebhook\webhooks;
 
 abstract class AbstractWebhook
 {

@@ -1,6 +1,6 @@
 <?php
 /**
- * english language file for swarmzapierstructwebhook plugin
+ * english language file for swarmwebhook plugin
  *
  * @author Michael Große <mic.grosse@googlemail.com>
  */

@@ -1,6 +1,6 @@
 <?php
 
-namespace dokuwiki\plugin\swarmzapierstructwebhook\webhooks;
+namespace dokuwiki\plugin\swarmwebhook\webhooks;
 
 use dokuwiki\plugin\struct\meta\Schema;
 
@@ -14,10 +14,10 @@ class Zapier extends AbstractWebhook
             dbglog($_SERVER);
         }
 
-        /** @var null|\helper_plugin_swarmzapierstructwebhook $helper */
-        $helper = plugin_load('helper', 'swarmzapierstructwebhook');
+        /** @var null|\helper_plugin_swarmwebhook $helper */
+        $helper = plugin_load('helper', 'swarmwebhook');
         if (!$helper) {
-            http_status(422, 'swarmzapierstructwebhook plugin not active at this server');
+            http_status(422, 'swarmwebhook plugin not active at this server');
             return;
         }
         /*
@@ -63,8 +63,8 @@ class Zapier extends AbstractWebhook
             return false;
         }
 
-        /** @var \helper_plugin_swarmzapierstructwebhook $helper */
-        $helper = plugin_load('helper', 'swarmzapierstructwebhook');
+        /** @var \helper_plugin_swarmwebhook $helper */
+        $helper = plugin_load('helper', 'swarmwebhook');
 
         $lookupData = $this->extractDataFromPayload(json_decode($json, true));
         $lookupData['json'] = $json;
@@ -101,8 +101,8 @@ class Zapier extends AbstractWebhook
         $checkinID = $data['id'];
         $locationName = $data['venue']['name'];
 
-        /** @var \helper_plugin_swarmzapierstructwebhook $helper */
-        $helper = plugin_load('helper', 'swarmzapierstructwebhook');
+        /** @var \helper_plugin_swarmwebhook $helper */
+        $helper = plugin_load('helper', 'swarmwebhook');
         $dateTime = $helper->getDateTimeInstance($data['createdAt'], $data['timeZoneOffset']);
 
         $lookupData = [

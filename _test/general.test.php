@@ -1,11 +1,11 @@
 <?php
 /**
- * General tests for the swarmzapierstructwebhook plugin
+ * General tests for the swarmwebhook plugin
  *
- * @group plugin_swarmzapierstructwebhook
+ * @group plugin_swarmwebhook
  * @group plugins
  */
-class general_plugin_swarmzapierstructwebhook_test extends DokuWikiTest
+class general_plugin_swarmwebhook_test extends DokuWikiTest
 {
 
     /**
@@ -26,7 +26,7 @@ class general_plugin_swarmzapierstructwebhook_test extends DokuWikiTest
         $this->assertArrayHasKey('desc', $info);
         $this->assertArrayHasKey('url', $info);
 
-        $this->assertEquals('swarmzapierstructwebhook', $info['base']);
+        $this->assertEquals('swarmwebhook', $info['base']);
         $this->assertRegExp('/^https?:\/\//', $info['url']);
         $this->assertTrue(mail_isvalid($info['email']));
         $this->assertRegExp('/^\d\d\d\d-\d\d-\d\d$/', $info['date']);
@@ -51,7 +51,7 @@ class general_plugin_swarmzapierstructwebhook_test extends DokuWikiTest
         $this->assertEquals(
             gettype($conf),
             gettype($meta),
-            'Both ' . DOKU_PLUGIN . 'swarmzapierstructwebhook/conf/default.php and ' . DOKU_PLUGIN . 'swarmzapierstructwebhook/conf/metadata.php have to exist and contain the same keys.'
+            'Both ' . DOKU_PLUGIN . 'swarmwebhook/conf/default.php and ' . DOKU_PLUGIN . 'swarmwebhook/conf/metadata.php have to exist and contain the same keys.'
         );
 
         if (gettype($conf) != 'NULL' && gettype($meta) != 'NULL') {
@@ -59,7 +59,7 @@ class general_plugin_swarmzapierstructwebhook_test extends DokuWikiTest
                 $this->assertArrayHasKey(
                     $key,
                     $meta,
-                    'Key $meta[\'' . $key . '\'] missing in ' . DOKU_PLUGIN . 'swarmzapierstructwebhook/conf/metadata.php'
+                    'Key $meta[\'' . $key . '\'] missing in ' . DOKU_PLUGIN . 'swarmwebhook/conf/metadata.php'
                 );
             }
 
@@ -67,7 +67,7 @@ class general_plugin_swarmzapierstructwebhook_test extends DokuWikiTest
                 $this->assertArrayHasKey(
                     $key,
                     $conf,
-                    'Key $conf[\'' . $key . '\'] missing in ' . DOKU_PLUGIN . 'swarmzapierstructwebhook/conf/default.php'
+                    'Key $conf[\'' . $key . '\'] missing in ' . DOKU_PLUGIN . 'swarmwebhook/conf/default.php'
                 );
             }
         }

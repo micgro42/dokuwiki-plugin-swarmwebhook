@@ -1,6 +1,6 @@
 <?php
 /**
- * Options for the swarmzapierstructwebhook plugin
+ * Options for the swarmwebhook plugin
  *
  * @author Michael Große <mic.grosse@googlemail.com>
  */

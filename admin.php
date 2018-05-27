@@ -1,6 +1,6 @@
 <?php
 
-class admin_plugin_swarmzapierstructwebhook extends DokuWiki_Admin_Plugin
+class admin_plugin_swarmwebhook extends DokuWiki_Admin_Plugin
 {
 
     public function forAdminOnly()
@@ -14,7 +14,7 @@ class admin_plugin_swarmzapierstructwebhook extends DokuWiki_Admin_Plugin
         $secret = $this->getConf('hook_secret');
         if (empty($secret)) {
             $exampleSecret = md5(time());
-            $settingsID = 'plugin____swarmzapierstructwebhook____plugin_settings_name';
+            $settingsID = 'plugin____swarmwebhook____plugin_settings_name';
             $configHRef = DOKU_REL . DOKU_SCRIPT . '?do=admin&page=config#' . $settingsID;
             $configLink = '<a href="' . $configHRef . '">' . $this->getLang('configuration') . '</a>';
             $secretNeededMsg = sprintf(
@@ -35,7 +35,7 @@ class admin_plugin_swarmzapierstructwebhook extends DokuWiki_Admin_Plugin
         $htmlIFTTT .= 'Enter the following Data in the Form:';
         $htmlIFTTT .= '<ul>';
         $htmlIFTTT .= '<li>';
-        $webhookURL = DOKU_URL . 'lib/plugins/swarmzapierstructwebhook/webhook.php';
+        $webhookURL = DOKU_URL . 'lib/plugins/swarmwebhook/webhook.php';
         $htmlIFTTT .= '<strong>URL</strong>: <code>' . $webhookURL . '</code>';
         $htmlIFTTT .= '</li>';
         $htmlIFTTT .= '<li>';

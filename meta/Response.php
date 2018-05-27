@@ -1,7 +1,7 @@
 <?php
 
 
-namespace dokuwiki\plugin\swarmzapierstructwebhook\meta;
+namespace dokuwiki\plugin\swarmwebhook\meta;
 
 class Response
 {
