@@ -1,7 +1,7 @@
 base   swarmwebhook
 author Michael Große
 email  mic.grosse@googlemail.com
-date   2018-05-11
+date   2018-05-27
 name   swarmwebhook plugin
 desc   A webhook endpoint for swarm checkins forwarded Zapier or IFTTT into a struct table
 url    https://dokuwiki.org/plugin:swarmwebhook
