@@ -20,7 +20,10 @@ class Zapier extends AbstractWebhook
             http_status(422, 'swarmzapierstructwebhook plugin not active at this server');
             return;
         }
-        $storedSecret = $helper->getConf('hook secret');
+        /*
+        @FIXME unfotunately Zapier fails to send the respective header, even when configured correctly
+        @FIXME until this is resolved by Zapier, this security check is useless 😕
+        $storedSecret = $helper->getConf('hook_secret');
         if (!empty($storedSecret)) {
             $requestSecret = $INPUT->server->str('X_HOOK_SECRET');
             if (empty($requestSecret)) {
@@ -33,6 +36,7 @@ class Zapier extends AbstractWebhook
                 return;
             }
         }
+        */
 
         $ok = $this->handleWebhookPayload($json);
 

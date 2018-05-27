@@ -6,5 +6,5 @@
  */
 
 // keys need to match the config setting name
- $lang['hook_secret'] = 'Secret expected in X_HOOK_SECRET header. Empty to disable check';
+ $lang['hook_secret'] = 'Secret in the Webhhok. Fill for IFTTT. Broken for Zapier 😕';
 
