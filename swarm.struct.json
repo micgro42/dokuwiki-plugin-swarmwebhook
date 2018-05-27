@@ -1,0 +1,168 @@
+{
+    "structversion": "2018-04-24",
+    "schema": "swarm",
+    "id": "24",
+    "user": "michael",
+    "config": {
+        "allowed editors": "",
+        "label": {
+            "en": ""
+        }
+    },
+    "columns": [
+        {
+            "colref": 1,
+            "ismulti": false,
+            "isenabled": true,
+            "sort": 10,
+            "label": "date",
+            "class": "Date",
+            "config": {
+                "visibility": {
+                    "inpage": true,
+                    "ineditor": true
+                },
+                "format": "Y\/m\/d",
+                "prefilltoday": false,
+                "label": {
+                    "en": ""
+                },
+                "hint": {
+                    "en": ""
+                }
+            }
+        },
+        {
+            "colref": 2,
+            "ismulti": false,
+            "isenabled": true,
+            "sort": 20,
+            "label": "json",
+            "class": "Text",
+            "config": {
+                "visibility": {
+                    "inpage": true,
+                    "ineditor": true
+                },
+                "prefix": "",
+                "postfix": "",
+                "label": {
+                    "en": "The original json payload"
+                },
+                "hint": {
+                    "en": ""
+                }
+            }
+        },
+        {
+            "colref": 3,
+            "ismulti": false,
+            "isenabled": true,
+            "sort": 30,
+            "label": "locname",
+            "class": "Text",
+            "config": {
+                "visibility": {
+                    "inpage": true,
+                    "ineditor": true
+                },
+                "prefix": "",
+                "postfix": "",
+                "label": {
+                    "en": ""
+                },
+                "hint": {
+                    "en": ""
+                }
+            }
+        },
+        {
+            "colref": 4,
+            "ismulti": false,
+            "isenabled": true,
+            "sort": 40,
+            "label": "checkinid",
+            "class": "Text",
+            "config": {
+                "visibility": {
+                    "inpage": true,
+                    "ineditor": true
+                },
+                "prefix": "",
+                "postfix": "",
+                "label": {
+                    "en": ""
+                },
+                "hint": {
+                    "en": ""
+                }
+            }
+        },
+        {
+            "colref": 5,
+            "ismulti": false,
+            "isenabled": true,
+            "sort": 50,
+            "label": "shout",
+            "class": "Text",
+            "config": {
+                "visibility": {
+                    "inpage": true,
+                    "ineditor": true
+                },
+                "prefix": "",
+                "postfix": "",
+                "label": {
+                    "en": ""
+                },
+                "hint": {
+                    "en": ""
+                }
+            }
+        },
+        {
+            "colref": 6,
+            "ismulti": false,
+            "isenabled": true,
+            "sort": 60,
+            "label": "time",
+            "class": "DateTime",
+            "config": {
+                "visibility": {
+                    "inpage": true,
+                    "ineditor": true
+                },
+                "format": "H:i",
+                "prefilltoday": false,
+                "label": {
+                    "en": ""
+                },
+                "hint": {
+                    "en": ""
+                }
+            }
+        },
+        {
+            "colref": 7,
+            "ismulti": false,
+            "isenabled": true,
+            "sort": 70,
+            "label": "service",
+            "class": "Text",
+            "config": {
+                "visibility": {
+                    "inpage": true,
+                    "ineditor": true
+                },
+                "prefix": "",
+                "postfix": "",
+                "label": {
+                    "en": ""
+                },
+                "hint": {
+                    "en": ""
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+tools:
+    external_code_coverage: true
+build:
+    dependencies:
+        override:
+            - true #stops the inferred commands from requirements.txt

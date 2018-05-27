@@ -1,0 +1,18 @@
+# Config file for travis-ci.org
+
+language: php
+php:
+  - "7.2"
+  - "7.1"
+  - "7.0"
+  - "5.6"
+env:
+  - DOKUWIKI=master
+  - DOKUWIKI=stable
+before_install: wget https://raw.github.com/splitbrain/dokuwiki-travis/master/travis.sh
+install: sh travis.sh
+script:
+  - cd _test
+  - phpunit --configuration=../lib/plugins/swarmwebhook/phpunit.xml --group plugin_swarmwebhook --coverage-clover=coverage.clover
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover --repository=g/$TRAVIS_REPO_SLUG --revision=$TRAVIS_COMMIT
