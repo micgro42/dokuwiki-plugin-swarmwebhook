@@ -10,7 +10,7 @@ class admin_plugin_swarmwebhook extends DokuWiki_Admin_Plugin
 
     public function html()
     {
-        echo '<h1>Instructions to create the swarm webhook with IFTTT or Zapier</h1>';
+        echo '<h1>Instructions to create the swarm webhook with IFTTT</h1>';
         $secret = $this->getConf('hook_secret');
         if (empty($secret)) {
             $exampleSecret = md5(time());

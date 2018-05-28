@@ -1,6 +1,6 @@
 swarmwebhook Plugin for DokuWiki
 
-A webhook endpoint for swarm checkins forwarded by zapier into a struct table
+A webhook endpoint for swarm checkins forwarded by IFTTT into a struct table
 
 All documentation for this plugin can be found at
 https://dokuwiki.org/plugin:swarmwebhook
