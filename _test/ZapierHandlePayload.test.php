@@ -13,6 +13,13 @@ class ZapierHandlePayload extends \DokuWikiTest
     /** @var array alway enable the needed plugins */
     protected $pluginsEnabled = ['swarmwebhook', 'struct', 'sqlite'];
 
+    function setUp(){
+        global $conf;
+
+        parent::setUp();
+
+        $conf ['plugin']['swarmwebhook']['service'] = 'Zapier';
+    }
 
     /**
      * Do not refactor these with a DataProvider -> struct database state would depend on order of execution
