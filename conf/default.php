@@ -5,4 +5,5 @@
  * @author Michael Große <mic.grosse@googlemail.com>
  */
 
+$conf['service']        = 'IFTTT';
 $conf['hook_secret']    = '';
