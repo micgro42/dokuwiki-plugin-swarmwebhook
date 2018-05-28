@@ -20,6 +20,10 @@ class Zapier extends AbstractWebhook
             http_status(422, 'swarmwebhook plugin not active at this server');
             return;
         }
+        if ($helper->getConf('service') !== 'Zapier') {
+            http_status(422, 'This service is deactivated in the plugin configuration.');
+            return;
+        }
         /*
         @FIXME unfotunately Zapier fails to send the respective header, even when configured correctly
         @FIXME until this is resolved by Zapier, this security check is useless 😕

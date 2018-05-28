@@ -6,5 +6,6 @@
  */
 
 // keys need to match the config setting name
- $lang['hook_secret'] = 'Secret in the Webhhok. Fill for IFTTT. Broken for Zapier 😕';
+$lang['service'] = 'Which service should be used? Zapier is discouraged for security reasons.';
+$lang['hook_secret'] = 'Secret in the Webhhok. Fill for IFTTT. Broken for Zapier 😕';
 

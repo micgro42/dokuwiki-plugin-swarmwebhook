@@ -18,6 +18,17 @@ class IFTTT extends AbstractWebhook
             dbglog($_SERVER);
         }
 
+        /** @var null|\helper_plugin_swarmwebhook $helper */
+        $helper = plugin_load('helper', 'swarmwebhook');
+        if (!$helper) {
+            http_status(422, 'swarmwebhook plugin not active at this server');
+            return;
+        }
+        if ($helper->getConf('service') !== 'IFTTT') {
+            http_status(422, 'This service is deactivated in the plugin configuration.');
+            return;
+        }
+
         // check that we have helper
         $webhookData = json_decode($json, true);
 
