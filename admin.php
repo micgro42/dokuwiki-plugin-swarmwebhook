@@ -8,6 +8,11 @@ class admin_plugin_swarmwebhook extends DokuWiki_Admin_Plugin
         return true;
     }
 
+    public function handle()
+    {
+    }
+
+
     public function html()
     {
         echo '<h1>Instructions to create the swarm webhook with IFTTT</h1>';
