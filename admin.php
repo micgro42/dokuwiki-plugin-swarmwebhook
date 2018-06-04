@@ -43,47 +43,11 @@ class admin_plugin_swarmwebhook extends DokuWiki_Admin_Plugin
     {
         $secret = $this->getConf('hook_secret');
 
-        $htmlIFTTT = '<h2>IFTTT</h2>';
-        $htmlIFTTT .= '<ol>';
-        $htmlIFTTT .= '<li>';
-        $iftttFormHref = 'https://ifttt.com/create/if-any-new-check-in-then-make-a-web-request?sid=5';
-        $htmlIFTTT .= 'Go to <a href="' . $iftttFormHref . '">the relevant IFTTT form</a>';
-        $htmlIFTTT .= '</li>';
-        $htmlIFTTT .= '<li>';
-        $htmlIFTTT .= 'Enter the following Data in the Form:';
-        $htmlIFTTT .= '<ul>';
-        $htmlIFTTT .= '<li>';
-        $webhookURL = DOKU_URL . 'lib/plugins/swarmwebhook/webhook.php';
-        $htmlIFTTT .= '<strong>URL</strong>: <code>' . $webhookURL . '</code>';
-        $htmlIFTTT .= '</li>';
-        $htmlIFTTT .= '<li>';
-        $htmlIFTTT .= '<strong>Method</strong>: POST';
-        $htmlIFTTT .= '</li>';
-        $htmlIFTTT .= '<li>';
-        $htmlIFTTT .= '<strong>Content Type</strong>: application/json';
-        $htmlIFTTT .= '</li>';
-        $iftttBody = '
-{
-"ts": "{{CheckinDate}}",
-"shout": "{{Shout}}",
-"VenueName": "{{VenueName}}",
-"VenueUrl": "{{VenueUrl}}",
-"VenueMapImageUrl": "{{VenueMapImageUrl}}",
-"secret": "'. hsc($secret) . '"
-}';
-        $htmlIFTTT .= '<li>';
-        $htmlIFTTT .= '<strong>Body</strong>: <pre>' . $iftttBody . '</pre>';
-        $htmlIFTTT .= '</li>';
-        $htmlIFTTT .= '</ul>';
-        $htmlIFTTT .= '</li>';
-        $htmlIFTTT .= '<li>';
-        $htmlIFTTT .= 'Submit the form';
-        $htmlIFTTT .= '</li>';
-        $htmlIFTTT .= '<li>';
-        $htmlIFTTT .= 'Done ✅';
-        $htmlIFTTT .= '</li>';
-        $htmlIFTTT .= '</ol>';
+        $html = $this->locale_xhtml('ifttt_instructions');
 
-        return $htmlIFTTT;
+        $html = str_replace('DOKU_URL', DOKU_URL, $html);
+        $html = str_replace('$secret', hsc($secret), $html);
+
+        return $html;
     }
 }

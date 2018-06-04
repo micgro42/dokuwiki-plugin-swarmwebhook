@@ -1,0 +1,18 @@
+====== IFTTT ======
+  - Go to [[https://ifttt.com/create/if-any-new-check-in-then-make-a-web-request?sid=5|the relevant IFTTT form]]
+  - Enter the following Data in the Form:
+    * **URL**: ''%%DOKU_URLlib/plugins/swarmwebhook/webhook.php%%''
+    * **Method**: POST
+    * **Content Type**: application/json
+    * **body**: <code>
+{
+  "ts": "{{CheckinDate}}",
+  "shout": "{{Shout}}",
+  "VenueName": "{{VenueName}}",
+  "VenueUrl": "{{VenueUrl}}",
+  "VenueMapImageUrl": "{{VenueMapImageUrl}}",
+  "secret": "$secret"
+}
+</code>
+  - Submit the form
+  - Done ✅
