@@ -121,7 +121,7 @@ class IFTTT extends AbstractWebhook
         // gues time zone
         $nowTS = time();
 
-        $dateTime = $this->parseTimeIntoTimestamp($data['ts'], $nowTS);
+        $dateTime = $this->parseTimeIntoDateTime($data['ts'], $nowTS);
 
         $lookupData = [
             'date' => $dateTime->format('Y-m-d'),
@@ -141,7 +141,7 @@ class IFTTT extends AbstractWebhook
      *
      * @return \DateTime
      */
-    protected function parseTimeIntoTimestamp($timestring, $nowTS)
+    protected function parseTimeIntoDateTime($timestring, $nowTS)
     {
         //May 25, 2018 at 04:32PM
 
