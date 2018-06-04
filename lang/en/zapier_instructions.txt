@@ -1,0 +1,15 @@
+====== Zapier ======
+===== Setup for the trigger =====
+  - Go to [[https://zapier.com/app/editor/|the Zapier App editor]]
+  - Search for ''Swarm'' and choose  ''New Checkin'' as the trigger
+  - connect to your Swarm account via the provided oAuth process
+  - fetch your last Check-In from Swarm as a sample
+===== Setup for the Hook =====
+  - Search for ''Webhook'' in the search field and choose ''Webhooks by Zapier''
+  - Choose ''POST'' as the the request type
+  - Adjust the following Data in the Form:
+    * **URL**: ''%%DOKU_URLlib/plugins/swarmwebhook/webhook.php%%''
+    * **Payload Type**: Json
+  - Submit the form
+  - Test the webhook
+  - Done ✅

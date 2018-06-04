@@ -32,6 +32,7 @@ class admin_plugin_swarmwebhook extends DokuWiki_Admin_Plugin
         }
 
         echo $this->iftttInstructionsHTML();
+        echo $this->zapierInstructionsHTML();
     }
 
     /**
@@ -48,6 +49,18 @@ class admin_plugin_swarmwebhook extends DokuWiki_Admin_Plugin
         $html = str_replace('DOKU_URL', DOKU_URL, $html);
         $html = str_replace('$secret', hsc($secret), $html);
 
+        return $html;
+    }
+
+    /**
+     * Get the instructions for Zapier
+     *
+     * @return string
+     */
+    protected function zapierInstructionsHTML()
+    {
+        $html = $this->locale_xhtml('zapier_instructions');
+        $html = str_replace('DOKU_URL', DOKU_URL, $html);
         return $html;
     }
 }
