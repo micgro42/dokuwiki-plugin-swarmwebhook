@@ -1,16 +1,21 @@
-swarmwebhook Plugin for DokuWiki
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/micgro42/dokuwiki-plugin-swarmwebhook/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/micgro42/dokuwiki-plugin-swarmwebhook/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/micgro42/dokuwiki-plugin-swarmwebhook/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/micgro42/dokuwiki-plugin-swarmwebhook/?branch=master)
+[![Build Status](https://travis-ci.com/micgro42/dokuwiki-plugin-swarmwebhook.svg?branch=master)](https://travis-ci.com/micgro42/dokuwiki-plugin-swarmwebhook)
 
-A webhook endpoint for swarm checkins forwarded by IFTTT into a struct table
+## Swarm Webhook Plugin for DokuWiki
+
+A webhook endpoint for swarm Check-Ins forwarded by IFTTT or Zapier into a struct table
 
 All documentation for this plugin can be found at
-https://dokuwiki.org/plugin:swarmwebhook
+[https://dokuwiki.org/plugin:swarmwebhook](https://dokuwiki.org/plugin:swarmwebhook)
 
 If you install this plugin manually, make sure it is installed in
 lib/plugins/swarmwebhook/ - if the folder is called different it
 will not work!
 
-Please refer to http://www.dokuwiki.org/plugins for additional info
+Please refer to [https://www.dokuwiki.org/plugins](https://www.dokuwiki.org/plugins) for additional info
 on how to install plugins in DokuWiki.
+
 
 ----
 Copyright (C) Michael Große <mic.grosse@googlemail.com>
