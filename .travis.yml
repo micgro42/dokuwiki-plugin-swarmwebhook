@@ -2,6 +2,7 @@
 
 language: php
 php:
+  - "nightly"
   - "7.2"
   - "7.1"
   - "7.0"
@@ -9,6 +10,9 @@ php:
 env:
   - DOKUWIKI=master
   - DOKUWIKI=stable
+matrix:
+  allow_failures:
+    - php: "nightly"
 before_install: wget https://raw.github.com/splitbrain/dokuwiki-travis/master/travis.sh
 install: sh travis.sh
 script:
