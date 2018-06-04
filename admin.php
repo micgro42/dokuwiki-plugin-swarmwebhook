@@ -30,6 +30,19 @@ class admin_plugin_swarmwebhook extends DokuWiki_Admin_Plugin
             echo '<p>' . $secretNeededMsg . '</p>';
             return;
         }
+
+        echo $this->iftttInstructionsHTML();
+    }
+
+    /**
+     * Get the instructions for IFTTT
+     *
+     * @return string
+     */
+    protected function iftttInstructionsHTML()
+    {
+        $secret = $this->getConf('hook_secret');
+
         $htmlIFTTT = '<h2>IFTTT</h2>';
         $htmlIFTTT .= '<ol>';
         $htmlIFTTT .= '<li>';
@@ -56,7 +69,7 @@ class admin_plugin_swarmwebhook extends DokuWiki_Admin_Plugin
 "VenueName": "{{VenueName}}",
 "VenueUrl": "{{VenueUrl}}",
 "VenueMapImageUrl": "{{VenueMapImageUrl}}",
-"secret": "'. $secret . '"
+"secret": "'. hsc($secret) . '"
 }';
         $htmlIFTTT .= '<li>';
         $htmlIFTTT .= '<strong>Body</strong>: <pre>' . $iftttBody . '</pre>';
@@ -71,6 +84,6 @@ class admin_plugin_swarmwebhook extends DokuWiki_Admin_Plugin
         $htmlIFTTT .= '</li>';
         $htmlIFTTT .= '</ol>';
 
-        echo $htmlIFTTT;
+        return $htmlIFTTT;
     }
 }
