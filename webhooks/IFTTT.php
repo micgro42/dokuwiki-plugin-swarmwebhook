@@ -149,6 +149,10 @@ class IFTTT extends AbstractWebhook
         $timeZone = new \DateTimeZone($guessedTZOffset);
         $dateTime = DateTime::createFromFormat(self::IFTTT_TIME_FORMAT, $timestring, $timeZone);
 
+        if (!$dateTime) {
+            return new DateTime('now', $timeZone);
+        }
+
         return $dateTime;
     }
 
