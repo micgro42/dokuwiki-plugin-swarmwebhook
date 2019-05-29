@@ -38,15 +38,15 @@ class helper_plugin_swarmwebhook extends DokuWiki_Plugin
     {
         /** @var helper_plugin_struct $structHelper */
         $structHelper = plugin_load('helper', 'struct');
+        $access = AccessTable::byTableName('swarm', 0, 0);
         if (method_exists($structHelper, 'saveLookupData')) {
-            $structHelper->saveLookupData('swarm', $data);
+            $structHelper->saveLookupData($access, $data);
             return;
         }
 
         // old struct version - we save the data ourselves!
 
         dbglog('Please update your struct plugin!');
-        $access = AccessTable::byTableName('swarm', 0, 0);
         if (!$access->getSchema()->isEditable()) {
             throw new StructException('lookup save error: no permission for schema');
         }
