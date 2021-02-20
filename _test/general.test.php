@@ -1,4 +1,5 @@
 <?php
+
 /**
  * General tests for the swarmwebhook plugin
  *
@@ -11,7 +12,7 @@ class general_plugin_swarmwebhook_test extends DokuWikiTest
     /**
      * Simple test to make sure the plugin.info.txt is in correct format
      */
-    public function test_plugininfo()
+    public function test_plugininfo(): void
     {
         $file = __DIR__ . '/../plugin.info.txt';
         $this->assertFileExists($file);
@@ -26,11 +27,11 @@ class general_plugin_swarmwebhook_test extends DokuWikiTest
         $this->assertArrayHasKey('desc', $info);
         $this->assertArrayHasKey('url', $info);
 
-        $this->assertEquals('swarmwebhook', $info['base']);
-        $this->assertRegExp('/^https?:\/\//', $info['url']);
-        $this->assertTrue(mail_isvalid($info['email']));
-        $this->assertRegExp('/^\d\d\d\d-\d\d-\d\d$/', $info['date']);
-        $this->assertTrue(false !== strtotime($info['date']));
+        $this->assertEquals('swarmwebhook', $info[ 'base' ]);
+        $this->assertRegExp('/^https?:\/\//', $info[ 'url' ]);
+        $this->assertTrue(mail_isvalid($info[ 'email' ]));
+        $this->assertRegExp('/^\d\d\d\d-\d\d-\d\d$/', $info[ 'date' ]);
+        $this->assertTrue(false !== strtotime($info[ 'date' ]));
     }
 
     /**
@@ -41,11 +42,11 @@ class general_plugin_swarmwebhook_test extends DokuWikiTest
     {
         $conf_file = __DIR__ . '/../conf/default.php';
         if (file_exists($conf_file)) {
-            include($conf_file);
+            include $conf_file;
         }
         $meta_file = __DIR__ . '/../conf/metadata.php';
         if (file_exists($meta_file)) {
-            include($meta_file);
+            include $meta_file;
         }
 
         $this->assertEquals(
@@ -71,6 +72,5 @@ class general_plugin_swarmwebhook_test extends DokuWikiTest
                 );
             }
         }
-
     }
 }

@@ -10,10 +10,12 @@ namespace dokuwiki\plugin\swarmwebhook\test;
  */
 class IFTTTfullWebhook extends \DokuWikiTest
 {
-    /** @var array alway enable the needed plugins */
+    /**
+     * @var array alway enable the needed plugins 
+     */
     protected $pluginsEnabled = ['swarmwebhook', 'struct', 'sqlite'];
 
-    public function test_parseTimeIntoTimestamp()
+    public function test_parseTimeIntoTimestamp(): void
     {
         $inputJSON = '{
         "ts":"May 25, 2018 at 04:32PM",
@@ -27,7 +29,9 @@ class IFTTTfullWebhook extends \DokuWikiTest
 
         $IFTTT->run($inputJSON);
 
-        /** @var \remote_plugin_struct $remote */
+        /**
+ * @var \remote_plugin_struct $remote 
+*/
         $remote = plugin_load('remote', 'struct');
         $rows = $remote->getAggregationData(
             ['swarm'],
@@ -44,7 +48,7 @@ class IFTTTfullWebhook extends \DokuWikiTest
             'swarm.service' => 'IFTTT',
         ];
 
-//        $this->assertTrue($actualOK, 'single event, initially creating the schema');
-        $this->assertEquals($rows[0], $expectedRows);
+        //        $this->assertTrue($actualOK, 'single event, initially creating the schema');
+        $this->assertEquals($rows[ 0 ], $expectedRows);
     }
 }

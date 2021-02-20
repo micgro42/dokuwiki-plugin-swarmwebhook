@@ -10,10 +10,12 @@ namespace dokuwiki\plugin\swarmwebhook\test;
  */
 class IFTTTparseTime extends \DokuWikiTest
 {
-    /** @var array alway enable the needed plugins */
+    /**
+     * @var array alway enable the needed plugins 
+     */
     protected $pluginsEnabled = ['swarmwebhook'];
 
-    public function test_parseTimeIntoTimestamp()
+    public function test_parseTimeIntoTimestamp(): void
     {
         $IFTTT = new mock\IFTTT();
 

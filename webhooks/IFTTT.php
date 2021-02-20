@@ -8,17 +8,19 @@ use dokuwiki\plugin\swarmwebhook\meta\Response;
 
 class IFTTT extends AbstractWebhook
 {
-    const IFTTT_TIME_FORMAT = 'F d, Y \a\t h:iA';
+    private const IFTTT_TIME_FORMAT = 'F d, Y \a\t h:iA';
 
     public function run($json)
     {
         global $conf, $INPUT;
 
-        if ($conf['allowdebug']) {
+        if ($conf[ 'allowdebug' ]) {
             dbglog($_SERVER);
         }
 
-        /** @var null|\helper_plugin_swarmwebhook $helper */
+        /**
+ * @var null|\helper_plugin_swarmwebhook $helper
+*/
         $helper = plugin_load('helper', 'swarmwebhook');
         if (!$helper) {
             http_status(422, 'swarmwebhook plugin not active at this server');
@@ -52,22 +54,23 @@ class IFTTT extends AbstractWebhook
      * @param array $webhookData
      *
      * @return true|Response
-     *
      */
     protected function verifyRequest(array $webhookData)
     {
-        /** @var null|\helper_plugin_swarmwebhook $helper */
+        /**
+ * @var null|\helper_plugin_swarmwebhook $helper
+*/
         $helper = plugin_load('helper', 'swarmwebhook');
         $storedSecret = $helper->getConf('hook secret');
         if (empty($storedSecret)) {
             return true;
         }
 
-        if (empty($webhookData['secret'])) {
+        if (empty($webhookData[ 'secret' ])) {
             return new Response(401, 'Header X_HOOK_SECRET missing!');
         }
 
-        if ($webhookData['secret'] !== $storedSecret) {
+        if ($webhookData[ 'secret' ] !== $storedSecret) {
             return new Response(403, 'Header X_HOOK_SECRET not identical with configured secret!');
         }
 
@@ -75,7 +78,7 @@ class IFTTT extends AbstractWebhook
     }
 
     /**
-     * @param array $webhookData
+     * @param array  $webhookData
      * @param string $json
      *
      * @return true|Response
@@ -83,11 +86,13 @@ class IFTTT extends AbstractWebhook
     protected function handleWebhookPayload(array $webhookData, $json)
     {
         $lookupData = $this->extractDataFromPayload($webhookData);
-        $lookupData['json'] = $json;
-        $lookupData['service'] = 'IFTTT';
+        $lookupData[ 'json' ] = $json;
+        $lookupData[ 'service' ] = 'IFTTT';
 
 
-        /** @var \helper_plugin_swarmwebhook $helper */
+        /**
+ * @var \helper_plugin_swarmwebhook $helper
+*/
         $helper = plugin_load('helper', 'swarmwebhook');
         try {
             $schemas = Schema::getAll('lookup');
@@ -95,7 +100,7 @@ class IFTTT extends AbstractWebhook
                 $helper->createNewSwarmSchema();
             }
 
-            $helper->deleteCheckinFromLookup($lookupData['checkinid']);
+            $helper->deleteCheckinFromLookup($lookupData[ 'checkinid' ]);
             $helper->saveDataToLookup($lookupData);
         } catch (\Exception $e) { // FIXME: catch more specific exceptions!
             $errorMessage = $e->getMessage();
@@ -115,13 +120,13 @@ class IFTTT extends AbstractWebhook
      */
     protected function extractDataFromPayload(array $data)
     {
-        $checkinID = $data['ts'];
-        $locationName = $data['VenueName'];
+        $checkinID = $data[ 'ts' ];
+        $locationName = $data[ 'VenueName' ];
 
         // gues time zone
         $nowTS = time();
 
-        $dateTime = $this->parseTimeIntoDateTime($data['ts'], $nowTS);
+        $dateTime = $this->parseTimeIntoDateTime($data[ 'ts' ], $nowTS);
 
         $lookupData = [
             'date' => $dateTime->format('Y-m-d'),
@@ -129,8 +134,8 @@ class IFTTT extends AbstractWebhook
             'checkinid' => $checkinID,
             'locname' => $locationName,
         ];
-        if (!empty($data['shout'])) {
-            $lookupData['shout'] = $data['shout'];
+        if (!empty($data[ 'shout' ])) {
+            $lookupData[ 'shout' ] = $data[ 'shout' ];
         }
         return $lookupData;
     }
@@ -163,7 +168,7 @@ class IFTTT extends AbstractWebhook
             dbglog(DateTime::getLastErrors());
             $dateTime = new DateTime('now');
         }
-        $guessedOffset = round(($dateTime->getTimestamp() - $nowTS)/3600)*100;
+        $guessedOffset = round(($dateTime->getTimestamp() - $nowTS) / 3600) * 100;
         $sign = $guessedOffset > 0 ? '+' : '';
 
         return $sign . (string)$guessedOffset;

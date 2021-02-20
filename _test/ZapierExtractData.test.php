@@ -10,10 +10,12 @@ namespace dokuwiki\plugin\swarmwebhook\test;
  */
 class ZapierExtractData extends \DokuWikiTest
 {
-    /** @var array alway enable the needed plugins */
+    /**
+     * @var array alway enable the needed plugins 
+     */
     protected $pluginsEnabled = ['swarmwebhook'];
 
-    public function dataProvider()
+    public function dataProvider(): array
     {
         return [
             [
@@ -38,7 +40,7 @@ class ZapierExtractData extends \DokuWikiTest
                     'service' => 'Zapier',
                 ],
                 'normal event with shout and sticker',
-            ]
+            ],
         ];
     }
 
@@ -49,7 +51,7 @@ class ZapierExtractData extends \DokuWikiTest
      * @param $expectedExtractedData
      * @param $msg
      */
-    public function test_extractDataFromPayload($inputJSON, $expectedExtractedData, $msg)
+    public function test_extractDataFromPayload($inputJSON, $expectedExtractedData, $msg): void
     {
         $zapierWebhook = new mock\Zapier();
         $inputArray = json_decode($inputJSON, true);

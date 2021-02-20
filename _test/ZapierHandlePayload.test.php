@@ -10,15 +10,18 @@ namespace dokuwiki\plugin\swarmwebhook\test;
  */
 class ZapierHandlePayload extends \DokuWikiTest
 {
-    /** @var array alway enable the needed plugins */
+    /**
+     * @var array alway enable the needed plugins 
+     */
     protected $pluginsEnabled = ['swarmwebhook', 'struct', 'sqlite'];
 
-    function setUp(){
+    function setUp(): void
+    {
         global $conf;
 
         parent::setUp();
 
-        $conf ['plugin']['swarmwebhook']['service'] = 'Zapier';
+        $conf [ 'plugin' ][ 'swarmwebhook' ][ 'service' ] = 'Zapier';
     }
 
     /**
@@ -31,7 +34,9 @@ class ZapierHandlePayload extends \DokuWikiTest
 
         $webhook->run($inputJSON);
 
-        /** @var \remote_plugin_struct $remote */
+        /**
+ * @var \remote_plugin_struct $remote 
+*/
         $remote = plugin_load('remote', 'struct');
         $rows = $remote->getAggregationData(
             ['swarm'],
@@ -48,7 +53,7 @@ class ZapierHandlePayload extends \DokuWikiTest
             'swarm.service' => 'Zapier',
         ];
 
-        $this->assertEquals($rows[0], $expectedRows, 'single event, initially creating the schema');
+        $this->assertEquals($rows[ 0 ], $expectedRows, 'single event, initially creating the schema');
     }
 
     /**
@@ -62,7 +67,9 @@ class ZapierHandlePayload extends \DokuWikiTest
         $actualOK = $webhook->handleWebhookPayload($inputJSON);
         $actualOK = $actualOK && $webhook->handleWebhookPayload($inputJSON);
 
-        /** @var \remote_plugin_struct $remote */
+        /**
+ * @var \remote_plugin_struct $remote 
+*/
         $remote = plugin_load('remote', 'struct');
         $rows = $remote->getAggregationData(
             ['swarm'],
@@ -81,6 +88,6 @@ class ZapierHandlePayload extends \DokuWikiTest
 
         $this->assertTrue($actualOK, 'single event, initially creating the schema');
         $this->assertCount(1, $rows, 'saving a payload twice should only create one row');
-        $this->assertEquals($rows[0], $expectedRows);
+        $this->assertEquals($rows[ 0 ], $expectedRows);
     }
 }

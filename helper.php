@@ -1,4 +1,5 @@
 <?php
+
 use dokuwiki\plugin\struct\meta\AccessTable;
 use dokuwiki\plugin\struct\meta\SchemaImporter;
 use dokuwiki\plugin\struct\meta\StructException;
@@ -36,7 +37,9 @@ class helper_plugin_swarmwebhook extends DokuWiki_Plugin
      */
     public function saveDataToLookup(array $data)
     {
-        /** @var helper_plugin_struct $structHelper */
+        /**
+ * @var helper_plugin_struct $structHelper
+*/
         $structHelper = plugin_load('helper', 'struct');
         $access = AccessTable::byTableName('swarm', 0, 0);
         if (method_exists($structHelper, 'saveLookupData')) {
@@ -68,12 +71,14 @@ class helper_plugin_swarmwebhook extends DokuWiki_Plugin
     {
         $tablename = 'swarm';
 
-        /** @var remote_plugin_struct $remote */
+        /**
+ * @var remote_plugin_struct $remote
+*/
         $remote = plugin_load('remote', 'struct');
         $rows = $remote->getAggregationData(
             [$tablename],
             ['%rowid%'],
-            [['logic'=> 'and', 'condition' => "checkinid = $checkinid"]]
+            [['logic' => 'and', 'condition' => "checkinid = $checkinid"]]
         );
 
         $pids = array_column($rows, '%rowid%');

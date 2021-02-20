@@ -1,6 +1,5 @@
 <?php
 
-
 namespace dokuwiki\plugin\swarmwebhook\meta;
 
 class Response
